@@ -1,0 +1,20 @@
+module CSA_32(sum, cout, overflow, a, b, cin);
+	input [31:0] a;
+	input [31:0] b;
+	input cin;
+	output [31:0] sum;
+	output [31:0] cout;
+	output overflow;
+	wire [15:0] cout_right;
+	RCA_16 rca_func1(sum[15:0], cout_right, a[15:0], b[15:0], cin);
+	assign cout[15:0] = cout_right;
+	wire [15:0] one_output;
+	wire [15:0] zero_output;
+	wire [15:0] cout_1;
+	wire [15:0] cout_0;
+	RCA_16 rca_func2(one_output, cout_1, a[31:16], b[31:16], 1);
+	RCA_16 rca_func3(zero_output, cout_0, a[31:16], b[31:16], 0);
+	assign sum[31:16] = cout_right[15] ? one_output : zero_output;
+	assign cout[31:16] = cout_right ? cout_1 : cout_0;
+	xor xor_func(overflow, cout[31], cout[30]);
+endmodule

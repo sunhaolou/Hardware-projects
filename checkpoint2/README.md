@@ -1,6 +1,7 @@
-TO DO: write an ALU.
+### TO DO: 
+write an ALU.
 
-Description:
+#### Description:
     Add:  I use the 32 bit CSA with the input data_operandA and data_operandB to
           get the result. When ALUopcode is 00000, the result will be assigned
           to data_result.
